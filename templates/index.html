@@ -1,28 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Text Summarizer</title>
-</head>
-<body style="font-family: 'Arial', sans-serif; background-color: #f5f5f5; margin: 0; padding: 0;">
+    <title>Upload PDF</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-image: url('/static/background.jpg'); /* Path to your background image */
+            background-size: cover;
+            background-position: center;
+        }
 
-    <h1 style="color: #e74c3c; font-size: 40px; text-align: center; padding: 20px; background-color: #2c3e50; margin: 0; color: white;">Text Summarizer</h1>
-    
-    <form action="/" method="post" style="max-width: 600px; margin: 20px auto; padding: 20px; background-color: #ecf0f1; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
-        <label for="text_input" style="display: block; text-align: center; font-size: 16px; color: #333; margin-bottom: 10px;">Enter Text:</label>
-        <textarea id="text_input" name="text_input" rows="4" cols="50" style="width: 100%; padding: 10px; box-sizing: border-box; border: 1px solid #bdc3c7; border-radius: 4px;"></textarea><br><br>
-        <input type="submit" value="Summarize" style="background-color: #3498db; color: white; padding: 10px 15px; border: none; border-radius: 4px; cursor: pointer; font-size: 16px;">
+        h2 {
+            margin-top: 0;
+            color: #ffffff; /* White color */
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        input[type="file"] {
+            margin-bottom: 10px;
+            font-size: 18px; /* Increase the font size */
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #030000;
+            border: none;
+            border-radius: 4px;
+            padding: 12px 24px; /* Increase padding for larger button */
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 18px; /* Increase the font size */
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        /* Display the summary */
+        /* Display the summary */
+/* Display the summary */
+.summary {
+    margin-top: 20px;
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    text-align: center;
+}
+
+/* Change color of "Summary" */
+.summary h2 {
+    color: #000000; /* Black color */
+}
+
+/* Increase font size of summary text */
+.summary p {
+    font-size: 18px; /* Adjust font size as needed */
+}
+
+
+
+        /* Warning message */
+        .warning {
+            color: #ff0000; /* Red color */
+            font-size: 16px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Property Terms Summarizer</h2>
+    <form action="/" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" accept=".pdf" required>
+        <p class="warning">Please choose a PDF file only.</p> <!-- Warning message -->
+        <br><br>
+        <input type="submit" value="Upload">
     </form>
 
-    {% if original_text %}
-        <h2 style="text-align: center; font-size: 24px; color: #2c3e50;">Original Text:</h2>
-        <p style="text-align: center; font-size: 18px; color: #333;  width: 100%; padding: 10px; box-sizing: border-box; border: 1px"></p>
-    {% endif %}
-
+    <!-- Display the summary -->
     {% if summary %}
-        <h2 style="text-align: center; font-size: 24px; color: #2c3e50;">Descriptive Summary:</h2>
-        <p style="text-align: center; font-size: 18px; color: #333; width: 100%; padding: 10px; box-sizing: border-box; border: 1px"></p>
+    <div class="summary">
+        <h2>Summary</h2>
+        <p>{{ summary }}</p>
+    </div>
     {% endif %}
 </body>
+
 </html>
